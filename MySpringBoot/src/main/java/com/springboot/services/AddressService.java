@@ -6,6 +6,6 @@ import com.springboot.model.Address;
 
 public interface AddressService {
 	
-	public List<Address> findByEmployeeId(long employeeId);
+	public List<Address> findByPinCode(String pinCode);
 	
 }

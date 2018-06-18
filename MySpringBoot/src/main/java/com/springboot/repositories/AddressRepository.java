@@ -10,5 +10,5 @@ import com.springboot.model.Address;
 @Repository
 public interface AddressRepository extends CrudRepository<Address, Long> {
  
-    List<Address> findByEmployeeId(long employeeId);
+    List<Address> findByPinCode(String pinCode);
 }

@@ -10,4 +10,6 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 	
 	public Employee findByAddressId(long addressId);
 
+	public Employee findByName(String name);
+
 }

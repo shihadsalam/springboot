@@ -2,6 +2,7 @@ package com.springboot.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.springboot.model.Employee;
 import com.springboot.repositories.EmployeeRepository;
@@ -13,13 +14,25 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private EmployeeRepository employeeRepository;
 
 	@Override
+	@Transactional
 	public Employee findByAddressId(long addressId) {
 		return employeeRepository.findByAddressId(addressId);
 	}
 
 	@Override
-	public void addEmployee(Employee employee) {
-		employeeRepository.save(employee);
+	@Transactional
+	public Employee addEmployee(Employee employee) {
+		return employeeRepository.save(employee);
+	}
+
+	@Override
+	public Employee findEmployeeByName(String name) {
+		return employeeRepository.findByName(name);
+	}
+
+	@Override
+	public void deleteEmployee(String name) {
+		employeeRepository.delete(findEmployeeByName(name));;
 	}
 
 }
