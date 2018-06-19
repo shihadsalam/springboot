@@ -26,13 +26,29 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
+	@Transactional
 	public Employee findEmployeeByName(String name) {
 		return employeeRepository.findByName(name);
 	}
 
 	@Override
+	@Transactional
 	public void deleteEmployee(String name) {
 		employeeRepository.delete(findEmployeeByName(name));;
+	}
+
+	@Override
+	@Transactional
+	public boolean update(Employee employee) {
+		Employee existingEmployee = findEmployeeByName(employee.getName());
+		if (null != existingEmployee) {
+			existingEmployee.update(employee);
+			return true;
+		}
+		else {
+			employeeRepository.save(employee);
+			return false;
+		}
 	}
 
 }
