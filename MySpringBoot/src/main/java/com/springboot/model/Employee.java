@@ -69,4 +69,10 @@ public class Employee {
 		this.address = address;
 	}
 	
+	public void update(Employee employee) {
+		this.setName(employee.getName());
+		this.setEmployeeCode(employee.getEmployeeCode());
+		this.setAddress(employee.getAddress());
+	}
+	
 }
