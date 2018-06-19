@@ -79,4 +79,25 @@ public class MyRESTController {
 		return new ResponseEntity<>(httpStatus);
 	}
 	
+    @ApiOperation(value = MyConstants.UPD_EMP_API_DOC_VALUE, nickname = MyConstants.UPD_EMP_API_DOC_VALUE, notes = MyConstants.UPD_EMP_API_DOC_NOTES)
+    @RequestMapping(method = RequestMethod.PUT)
+    @ResponseBody
+    public HttpEntity<Void> updateEmployee(@RequestBody Employee employee) {
+		HttpStatus httpStatus = HttpStatus.OK;
+		try {
+			boolean isUpdated = employeeService.update(employee);
+			if(isUpdated) {
+				LOGGER.info("Employee Updated :: " + employee.getName());
+			}
+			else {
+				LOGGER.info("Employee Added :: " + employee.getName());
+			}
+		}
+		catch (Exception ex) {
+			LOGGER.info("Error while updating Employee :: " + ex);
+			httpStatus = HttpStatus.NOT_FOUND;
+		}
+		return new ResponseEntity<>(httpStatus);
+    }
+
 }
