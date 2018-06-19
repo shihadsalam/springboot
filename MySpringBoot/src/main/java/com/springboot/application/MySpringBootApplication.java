@@ -1,6 +1,7 @@
 package com.springboot.application;
  
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -13,7 +14,11 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.springboot.model.Address;
+import com.springboot.model.Authority;
 import com.springboot.model.Employee;
+import com.springboot.model.User;
+import com.springboot.repositories.AuthorityRepository;
+import com.springboot.repositories.UserRepository;
 import com.springboot.services.AddressService;
 import com.springboot.services.EmployeeService;
 
@@ -31,6 +36,12 @@ public class MySpringBootApplication implements CommandLineRunner{
     @Autowired
     AddressService addressService;
     
+    @Autowired
+    UserRepository userRepository;
+    
+    @Autowired
+    AuthorityRepository authorityRepository;
+    
     public static void main(String[] args) {
         SpringApplication.run(MySpringBootApplication.class, args);
     }
@@ -46,6 +57,13 @@ public class MySpringBootApplication implements CommandLineRunner{
         
         Employee empl = employeeService.addEmployee(employee);
         LOGGER.info("Employee Added :: " + empl.getName());
+        
+        Authority auth1 = new Authority("PERMISSION_A");
+        Authority auth2 = new Authority("PERMISSION_B");
+        List<Authority> authorities = Arrays.asList(auth1, auth2);
+        authorityRepository.saveAll(authorities);
+        User user = new User("test", "test", true, authorities);
+        userRepository.save(user);
         
         List<Address> addrss = addressService.findByPinCode("695581");
         for (Address address : addrss) {
