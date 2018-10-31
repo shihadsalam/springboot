@@ -12,7 +12,8 @@ import org.springframework.security.oauth2.provider.token.ResourceServerTokenSer
 @Configuration
 @EnableResourceServer
 public class Oauth2ResourceServerConfig extends ResourceServerConfigurerAdapter {
-    @Autowired
+    
+	@Autowired
     private ResourceServerTokenServices tokenServices;
 
     @Value("${security.jwt.resource-ids}")

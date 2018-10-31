@@ -56,7 +56,15 @@ public class User implements UserDetails, Serializable {
     @JsonIgnore
     private Collection<Authority> authorities;
 
-    @Override
+
+    public User(String username, String password, boolean enabled, Collection<Authority> authorities) {
+		this.username = username;
+		this.password = password;
+		this.enabled = enabled;
+		this.authorities = authorities;
+	}
+
+	@Override
     public boolean isAccountNonExpired() {
         return !isAccountExpired();
     }

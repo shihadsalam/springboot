@@ -25,7 +25,11 @@ public class Authority implements GrantedAuthority {
     @Column(name = "NAME")
     private String name;
     
-    public String getName() {
+    public Authority(String name) {
+    		this.name = name;
+    }
+
+	public String getName() {
 		return name;
 	}
 
